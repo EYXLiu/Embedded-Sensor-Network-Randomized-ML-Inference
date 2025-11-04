@@ -1,4 +1,4 @@
-# Embedded Sensor Network in FreeRTOS with Built-in ML Model Inference
+# Embedded Sensor Network in FreeRTOS with Built-in ML Model Prediction
 
 # Compile
 Git clone the FreeRTOS-Kernel into the folder `git clone https://github.com/FreeRTOS/FreeRTOS-Kernel.git` <br/>
