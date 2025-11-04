@@ -6,10 +6,7 @@
 #include <time.h>
 
 static void SensorTask(void *pvParameters) {
-    struct {
-        uint8_t node_id;
-        QueueHandle_t queue;
-    } *params = pvParameters;
+    SensorParams *params = pvParameters;
 
     SensorPacket packet;
     packet.node_id= params->node_id;
@@ -23,11 +20,6 @@ static void SensorTask(void *pvParameters) {
 }
 
 void SensorTask_Create(uint8_t node_id, QueueHandle_t queue) {
-    typedef struct {
-        uint8_t node_id; 
-        QueueHandle_t queue;
-    } SensorParams;
-
     SensorParams *params = malloc(sizeof(SensorParams));
     params->node_id = node_id;
     params->queue = queue;
