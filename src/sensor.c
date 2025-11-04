@@ -15,7 +15,7 @@ static void SensorTask(void *pvParameters) {
     packet.node_id= params->node_id;
 
     for (;;) {
-        packet.reading = (rand() % 1000) / 10.0f;
+        packet.reading = (rand() % 1000) / 10.0f; //random data for now
         packet.timestamp_ms = xTaskGetTickCount() * portTICK_PERIOD_MS;
         xQueueSend(params->queue, &packet, portMAX_DELAY);
         vTaskDelay(pdMS_TO_TICKS(1000 + rand()%1000));
@@ -23,14 +23,16 @@ static void SensorTask(void *pvParameters) {
 }
 
 void SensorTask_Create(uint8_t node_id, QueueHandle_t queue) {
-    static struct {
+    typedef struct {
         uint8_t node_id; 
         QueueHandle_t queue;
-    } params;
-    params.node_id = node_id;
-    params.queue = queue;
+    } SensorParams;
+
+    SensorParams *params = malloc(sizeof(SensorParams));
+    params->node_id = node_id;
+    params->queue = queue;
 
     char name[16];
     snprintf(name, sizeof(name), "Sensor%u", node_id);
-    xTaskCreate(SensorTask, name, configMINIMAL_STACK_SIZE, &params, 2, NULL);
+    xTaskCreate(SensorTask, name, configMINIMAL_STACK_SIZE, params, 2, NULL);
 }

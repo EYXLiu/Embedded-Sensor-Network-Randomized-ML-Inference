@@ -29,6 +29,7 @@ add_executable(RTOSDemo
    src/main.c
    src/sensor.c
    src/base_station.c
+   src/ml_model.c
 )
 
 # Link FreeRTOS + POSIX pthread
