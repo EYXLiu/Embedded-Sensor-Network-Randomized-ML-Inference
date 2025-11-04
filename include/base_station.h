@@ -10,6 +10,6 @@ typedef struct {
     uint32_t timestamp_ms;
 } MLPacket;
 
-void BaseStationTask_Create(QueueHandle_t sensorQueue, QueueHandle_t mlQueue, uint8_t num_sensors);
+void BaseStationTask_Create(QueueHandle_t sensorQueue, QueueHandle_t mlQueue, uint8_t num_sensors, uint32_t lase_seen[]);
 
 #endif

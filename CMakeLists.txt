@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(MyFreeRTOSDemo C)
+project(EmbeddedML C)
 
 set(CMAKE_OSX_ARCHITECTURES x86_64)
 
@@ -25,12 +25,14 @@ target_include_directories(freertos_kernel PUBLIC
 )
 
 # Your main executable
-add_executable(RTOSDemo 
+add_executable(embml 
    src/main.c
    src/sensor.c
    src/base_station.c
    src/ml_model.c
+   src/network_manager.c
+   src/logger.c
 )
 
 # Link FreeRTOS + POSIX pthread
-target_link_libraries(RTOSDemo PRIVATE freertos_kernel pthread)
+target_link_libraries(embml PRIVATE freertos_kernel pthread)

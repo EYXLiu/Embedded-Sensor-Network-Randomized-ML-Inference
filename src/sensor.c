@@ -1,6 +1,7 @@
 #include "sensor.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "logger.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -27,4 +28,5 @@ void SensorTask_Create(uint8_t node_id, QueueHandle_t queue) {
     char name[16];
     snprintf(name, sizeof(name), "Sensor%u", node_id);
     xTaskCreate(SensorTask, name, configMINIMAL_STACK_SIZE, params, 2, NULL);
+    Logger_Send("[Snsr] Sensor %u created", node_id);
 }
