@@ -39,13 +39,20 @@ static void BaseStationTask(void *pvParameters) {
             }
 
             if (all_ready) {
-                float sum = 0;
+                mlPacket.num_sensors = params->num_sensors;
+                mlPacket.timestamp_ms = sensorPacket.timestamp_ms;
+                mlPacket.readings = pvPortMalloc(sizeof(float) * params->num_sensors);
+                if (mlPacket.readings == NULL) {
+                    for (int i = 0; i < params->num_sensors; i++) {
+                        has_reading[i] = false;
+                    }
+                    Logger_Send("[BS] Failed to create readings, skipping batch");
+                    continue;
+                }
                 for (int i = 0; i < params->num_sensors; i++) {
-                    sum += latest_readings[i].reading;
+                    mlPacket.readings[i] = latest_readings[i].reading;
                     has_reading[i] = false;
                 }
-                mlPacket.avg_reading = sensorPacket.reading;
-                mlPacket.timestamp_ms = sensorPacket.timestamp_ms;
                 xQueueSend(params->mlQueue, &mlPacket, portMAX_DELAY);
             }
         }

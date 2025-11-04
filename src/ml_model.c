@@ -10,8 +10,14 @@ static void MLModel(void *pvParameters) {
 
     for (;;) {
         if (xQueueReceive(queue, &packet, portMAX_DELAY) == pdTRUE) {
-            float prediction = packet.avg_reading * 1.05f;
+            float sum = 0;
+            for (int i = 0; i < packet.num_sensors; i++) {
+                sum += packet.readings[i];
+            }
+            float prediction = sum;
             Logger_Send("[ML] Time %u ms: Predicted = %.2f", packet.timestamp_ms, prediction);
+            vPortFree(packet.readings);
+            packet.readings = NULL;
         }
     }
 }
