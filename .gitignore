@@ -1,2 +1,4 @@
 /FreeRTOS-Kernel
 /build
+/flatbuffers
+/tflite-micro
