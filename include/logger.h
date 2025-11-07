@@ -11,6 +11,14 @@ typedef struct {
 } LogMessage;
 
 void LoggerTask_Create(void);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void Logger_Send(const char *fmt, ...);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

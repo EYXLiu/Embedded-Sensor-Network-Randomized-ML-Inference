@@ -7,8 +7,18 @@
 #include "logger.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 #define NUM_SENSORS 3
+
+
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
+    (void)xTask;
+    (void)pcTaskName;
+    // Optionally write to a volatile variable or single character to stdout
+    putchar('X'); fflush(stdout);
+    for(;;);
+}
 
 int main(void) {
     srand(time(NULL));
@@ -23,7 +33,7 @@ int main(void) {
         SensorTask_Create(i, sensorQueue);
     }
 
-    BaseStationTask_Create(sensorQueue, mlQueue, NUM_SENSORS, &last_seen);
+    BaseStationTask_Create(sensorQueue, mlQueue, NUM_SENSORS, last_seen);
     MLModel_Create(mlQueue);
     NetworkManager_Create(last_seen, NUM_SENSORS);
 

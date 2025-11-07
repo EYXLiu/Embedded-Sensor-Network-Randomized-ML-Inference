@@ -16,6 +16,9 @@
 #define configUSE_TASK_NOTIFICATIONS            1
 #define configTASK_NOTIFICATION_ARRAY_ENTRIES   3
 
+#define configUSE_TRACE_FACILITY 1
+#define configUSE_STATS_FORMATTING_FUNCTIONS 1
+
 
 #define configSUPPORT_STATIC_ALLOCATION         1
 #define configKERNEL_PROVIDED_STATIC_MEMORY     1
@@ -29,11 +32,10 @@
 
 #define configUSE_IDLE_HOOK                     0
 #define configUSE_TICK_HOOK                     0
-#define configCHECK_FOR_STACK_OVERFLOW          0
+#define configCHECK_FOR_STACK_OVERFLOW          1
 #define configUSE_MALLOC_FAILED_HOOK            0
 
 #define configGENERATE_RUN_TIME_STATS           0
-#define configUSE_TRACE_FACILITY                0
 
 #define INCLUDE_vTaskPrioritySet                1
 #define INCLUDE_uxTaskPriorityGet               1

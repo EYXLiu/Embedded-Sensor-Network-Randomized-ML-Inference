@@ -12,7 +12,7 @@ static void LoggerTask(void *pvParameters) {
     LogMessage log;
     for (;;) {
         if (xQueueReceive(logQueue, &log, portMAX_DELAY) == pdTRUE) {
-            printf("%s\n", log.msg);
+            puts("[Lgr]");
         }
     }
 }
@@ -20,7 +20,7 @@ static void LoggerTask(void *pvParameters) {
 void LoggerTask_Create(void) {
     logQueue= xQueueCreate(20, sizeof(LogMessage));
     xTaskCreate(LoggerTask, "Logger", configMINIMAL_STACK_SIZE*2, NULL, 1, NULL);
-    Logger_Send("[Lgr] Logger created");
+    printf("[Lgr] Logger created\n");
 }
 
 void Logger_Send(const char *fmt, ...) {

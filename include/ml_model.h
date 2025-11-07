@@ -5,6 +5,15 @@
 #include "queue.h"
 #include "base_station.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void MLModelTask(void* pvParameters);
 void MLModel_Create(QueueHandle_t mlQueue);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

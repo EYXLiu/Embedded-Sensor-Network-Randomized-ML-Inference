@@ -6,7 +6,9 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/FreeRTOS-Kernel/include/**",
                 "${workspaceFolder}/FreeRTOS-Kernel/portable/GCC/ARM_CM3//**",
-                "${workspaceFolder}/include/**"
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/models/**",
+                "${workspaceFolder}/tflite-micro/**"
             ],
             "defines": [
                 "projCOVERAGE_TEST=0"

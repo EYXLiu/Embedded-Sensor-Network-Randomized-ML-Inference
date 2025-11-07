@@ -27,6 +27,12 @@ void SensorTask_Create(uint8_t node_id, QueueHandle_t queue) {
 
     char name[16];
     snprintf(name, sizeof(name), "Sensor%u", node_id);
-    xTaskCreate(SensorTask, name, configMINIMAL_STACK_SIZE, params, 2, NULL);
-    Logger_Send("[Snsr] Sensor %u created", node_id);
+    BaseType_t ret;
+    ret = xTaskCreate(SensorTask, name, configMINIMAL_STACK_SIZE, params, 2, NULL);
+        if (ret != pdPASS) {
+        printf("Failed to create %s task!\n", name);
+        fflush(stdout);
+    }
+    printf("[Snsr] Sensor %u created\n", node_id);
+    fflush(stdout);
 }
