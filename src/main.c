@@ -23,7 +23,7 @@ int main(void) {
         SensorTask_Create(i, sensorQueue);
     }
 
-    BaseStationTask_Create(sensorQueue, mlQueue, NUM_SENSORS, &last_seen);
+    BaseStationTask_Create(sensorQueue, mlQueue, NUM_SENSORS, last_seen);
     MLModel_Create(mlQueue);
     NetworkManager_Create(last_seen, NUM_SENSORS);
 
